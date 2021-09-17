@@ -1,0 +1,25 @@
+@mixin formInput {
+  line-height: 2;
+  width: 80%;
+  border: 1px solid silver;
+  border-radius: 5px;
+}
+
+@mixin formP {
+  font-size: 10px;
+  text-align: left;
+  padding-left: 40px;
+  width: 80%;
+  margin-bottom: 5px;
+  user-select: none;
+}
+
+@mixin cardStyle {
+  width: 330px;
+  height: 200px;
+  background: rgb(53, 42, 104);
+  color: whitesmoke;
+  border-radius: 10px;
+  box-shadow: 10px 10px 20px rgb(121, 69, 109);
+  text-align: center;
+}

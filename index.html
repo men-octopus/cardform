@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+   <link rel="stylesheet" href="css/main.css">
+  <title>制作１</title>
+</head>
+<body>
+  <main>
+    <div id="info">
+      <!-- <div class="cardPosi"> -->
+        <div class="rotate" :class="{'moveBack':isFront === true, 'moveFront':isFront === false}">
+          <div class="card card-front">
+              <p class="cardNum">{{ num | toFourfold }}</p>
+              <div class="cardContainer">
+                <p class="cardName">{{ name }}</p>
+                <p class="cardDate">{{ month }} / {{ year }}</p>
+              </div>
+              <transition name='fade'>
+                <div class="square" :class="squarePlace"></div>
+                
+              </transition>
+            </div>
+            <div class="card card-back"  >
+              <p class="cardCode">{{ code }}</p> 
+            </div>
+        </div>
+      <!-- </div> -->
+            
+      <div class="form">
+        <div id="formNum">
+          <p>カード番号</p>
+          <input type="text" v-model="num" id="num" ref="num" @focus="squareMove('Num')" @blur="squareMove" maxlength="16" @click="deleteInput('num')" onKeydown="this.value=this.value.replace(/[^0-9]+/i,'')">
+          <p :class="{isNum}" class="error numError">16桁の半角数字で入力してください</p>
+        </div>
+  
+        <div id="formName" >
+          <p>名義人</p>
+          <input type="text" v-model="name" id="name" @focus="squareMove('Name')" @blur="squareMove" ref ="name" @click="deleteInput('name')" onKeydown="this.value=this.value.replace(/[^A-Z]+/i,'')">
+          <p :class="{isName}" class="error nameError">半角大文字で入力してください</p>
+        </div>
+  
+          <div class="container">
+            <p>有効期限</p>
+            <p>セキュリティコード</p>
+            
+            <select v-model="month" id="month" @focus="squareMove('Limit')" @blur="squareMove">
+              <option disabled selected>Month</option>
+              <option>01</option>
+              <option>02</option>
+              <option>03</option>
+              <option>04</option>
+              <option>05</option>
+              <option>06</option>
+              <option>07</option>
+              <option>08</option>
+              <option>09</option>
+              <option>10</option>
+              <option>11</option>
+              <option>12</option>
+            </select>
+
+            <select v-model="year" id="year" @focus="squareMove('Limit')" @blur="squareMove">
+              <option disabled selected>Year</option>
+              <option>2020</option>
+              <option>2021</option>
+              <option>2022</option>
+              <option>2023</option>
+              <option>2024</option>
+              <option>2025</option>
+              <option>2026</option>
+              <option>2027</option>
+              <option>2028</option>
+              <option>2029</option>
+              <option>2030</option>
+            </select>
+            <input type="text" v-model="code" id="code" @focus="cardTurn" @blur="cardTurn" maxlength="3" ref="code" @click="deleteInput('code')" onKeydown="this.value=this.value.replace(/[^0-9]+/i,'')">
+          </div>
+          <p :class="{isCode}" class="error codeError">3桁の半角数字で入力してください</p>
+          
+          <div >
+            <button :disabled = "!buttonUse">送信</button>
+          </div>
+  
+          </div>
+
+      </div>
+
+    </div>
+  </main>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
